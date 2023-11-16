@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
+import { BrowserRouter, StaticRouter } from 'react-router-dom';
+import Routes from './routing/Routes';
+import routeConfiguration from './routing/routeConfiguration';
+
 import './App.css';
 
-function App() {
+export const ClientApp = props => {
+  const { store} = props;
+  console.log("sono in client");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Routes routes={routeConfiguration()}/>
+        </BrowserRouter>
+      </HelmetProvider>
+    </Provider>
   );
-}
+};
 
-export default App;
+const { any, string } = PropTypes;
+
+ClientApp.propTypes = { store: any.isRequired };
+
+
+
