@@ -1,8 +1,11 @@
 import React from 'react';
-
+import {testaaa} from '../../util/api'
 
 export const LandingPageComponent = props => {
-console.log("sajhd");
+
+  testaaa({id:null})
+ .then(response=>console.log(response))
+
   return (
     <div>
         ciao

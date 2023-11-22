@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { ClientApp } from './App';
+import { ClientApp, renderApp } from './App';
 import routeConfiguration from './routing/routeConfiguration';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store';
+import { matchPathname } from './util/routes';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -73,7 +74,10 @@ if (typeof window !== 'undefined') {
 reportWebVitals(console.log);
 
 
+// Export the function for server side rendering.
+export default renderApp;
+
 // exporting matchPathname and configureStore for server side rendering.
 // matchPathname helps to figure out which route is called and if it has preloading needs
 // configureStore is used for creating initial store state for Redux after preloading
-export {  configureStore, routeConfiguration};
+export { matchPathname, configureStore, routeConfiguration };
