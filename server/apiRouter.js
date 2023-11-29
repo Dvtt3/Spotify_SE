@@ -24,7 +24,7 @@ router.use(
 router.use((req, res, next) => {
   if (req.get('Content-Type') === 'application/transit+json' && typeof req.body === 'string') {
     try {
-      req.body = JSON.parse(req.body);  //Possibile errore
+      req.body = req.body;  //Possibile errore
     } catch (e) {
       console.error('Failed to parse request body as Transit:');
       console.error(e);
@@ -38,7 +38,7 @@ router.use((req, res, next) => {
 // ================ API router endpoints: ================ //
 
 /*router.get('/initiate-login-as', initiateLoginAs);*/
-router.get('/test', testApi);
+router.post('/test', testApi);
 
 
 module.exports = router;

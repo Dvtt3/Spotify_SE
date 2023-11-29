@@ -13,7 +13,7 @@ export const apiBaseUrl = () => {
   }*/
 
   // Otherwise, use the same domain and port as the frontend
-  return `${window.location.origin}`;
+  return `http://localhost:3001`;
 };
 
 
@@ -22,19 +22,22 @@ export const apiBaseUrl = () => {
 
 const post = (path, body) => {
   const url = `${apiBaseUrl()}${path}`;
+  console.log(body);
   const options = {
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/transit+json',
     },
-    body: JSON.parse(body),
+    body: body,
   };
+  console.log(options);
   return window.fetch(url, options).then(res => {
     const contentTypeHeader = res.headers.get('Content-Type');
     const contentType = contentTypeHeader ? contentTypeHeader.split(';')[0] : null;
 
     if (res.status >= 400) {
+      console.log("Errore nella richiesta");
       return res.json().then(data => {
         let e = new Error();
         e = Object.assign(e, data);
@@ -43,6 +46,7 @@ const post = (path, body) => {
       });
     }
     if (contentType === 'application/transit+json') {
+      console.log("sono qui dentro");
       return res.text();
     } else if (contentType === 'application/json') {
       return res.json();

@@ -60,9 +60,10 @@ const render = (store, shouldHydrate) => {
 if (typeof window !== 'undefined') {
 
   // eslint-disable-next-line no-underscore-dangle
-  const preloadedState = window.__PRELOADED_STATE__ || '{}';
+  const preloadedState = window.__PRELOADED_STATE_ || '{}';
+  console.log(preloadedState);
   const initialState = JSON.parse(preloadedState);
-
+  
   const store = configureStore(initialState);
 
   render(store, !!window.__PRELOADED_STATE__);

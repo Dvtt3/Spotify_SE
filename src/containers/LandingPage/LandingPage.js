@@ -3,7 +3,7 @@ import {testaaa} from '../../util/api'
 
 export const LandingPageComponent = props => {
 
-  testaaa({id:null})
+  testaaa()
  .then(response=>console.log(response))
 
   return (
